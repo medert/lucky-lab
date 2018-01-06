@@ -19,7 +19,7 @@
         </div>
         <nav>
           <ul>
-            <li class="current"><a href="home.php">Home</a></li>
+            <li class="current"><a href="index.php">Home</a></li>
             <li><a href="about.php">About</a></li>
             <li><a href="products.php">Products</a></li>
             <li><a href="orders.php">Orders</a></li>

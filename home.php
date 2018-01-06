@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <meta http-equiv="refresh" content="1">
+    <!-- <meta http-equiv="refresh" content="1"> -->
     <meta name="keywords" content="dog, training">
     <meta name="description" content=" ">
     <meta name="author" content="Mederbek Toktosunov">

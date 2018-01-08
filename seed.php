@@ -1,21 +1,14 @@
 <?php
 
-require __DIR__."/vendor/autoload.php";
+$url = parse_url(getenv("CLEARDB_DATABASE_URL"));
 
-$Loader = new josegonzalez\Dotenv\Loader(__DIR__."/.env");
-// Parse the .env file
-$Loader->parse();
-//Send the parced .env file to the $_ENV variable
-$Loader->toEnv();
+$server = $url["host"];
+$username = $url["user"];
+$password = $url["pass"];
+$db = substr($url["path"], 1);
 
-$servername = $_ENV['MYSQL_ADDRESS'];
-$database = $_ENV['MYSQL_DB'];
-$username = $_ENV['MYSQL_USER'];
-$password = $_ENV['MYSQL_PASSWORD'];
-$port = $_ENV['MYSQL_PORT'];
+$conn = new mysqli($server, $username, $password, $db);
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname, $port);
 // Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);

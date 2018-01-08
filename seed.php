@@ -1,5 +1,19 @@
 <?php
 
+// require __DIR__."/vendor/autoload.php";
+//
+// $Loader = new josegonzalez\Dotenv\Loader(__DIR__."/.env");
+// // Parse the .env file
+// $Loader->parse();
+// //Send the parced .env file to the $_ENV variable
+// $Loader->toEnv();
+//
+// $servername = $_ENV['MYSQL_ADDRESS'];
+// $database = $_ENV['MYSQL_DB'];
+// $username = $_ENV['MYSQL_USER'];
+// $password = $_ENV['MYSQL_PASSWORD'];
+// $port = $_ENV['MYSQL_PORT'];
+
 $url = parse_url(getenv("CLEARDB_DATABASE_URL"));
 
 $server = $url["host"];

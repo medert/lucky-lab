@@ -29,21 +29,28 @@
     </header>
     <h1 id="page-title" align="center">Order Today</h1>
     <?php
-    require __DIR__."/vendor/autoload.php";
+    // require __DIR__."/vendor/autoload.php";
+    //
+    // $Loader = new josegonzalez\Dotenv\Loader(__DIR__."/.env");
+    // // Parse the .env file
+    // $Loader->parse();
+    // //Send the parced .env file to the $_ENV variable
+    // $Loader->toEnv();
+    //
+    // $servername = $_ENV['MYSQL_ADDRESS'];
+    // $database = $_ENV['MYSQL_DB'];
+    // $username = $_ENV['MYSQL_USER'];
+    // $password = $_ENV['MYSQL_PASSWORD'];
+    // $port = $_ENV['MYSQL_PORT'];
 
-    $Loader = new josegonzalez\Dotenv\Loader(__DIR__."/.env");
-    // Parse the .env file
-    $Loader->parse();
-    //Send the parced .env file to the $_ENV variable
-    $Loader->toEnv();
+    $url = parse_url(getenv("CLEARDB_DATABASE_URL"));
 
-    $servername = $_ENV['MYSQL_ADDRESS'];
-    $database = $_ENV['MYSQL_DB'];
-    $username = $_ENV['MYSQL_USER'];
-    $password = $_ENV['MYSQL_PASSWORD'];
-    $port = $_ENV['MYSQL_PORT'];
+    $server = $url["host"];
+    $username = $url["user"];
+    $password = $url["pass"];
+    $db = substr($url["path"], 1);
 
-    $conn=mysqli_connect($servername,$username,$password,$database,$port);
+    $conn = new mysqli($server, $username, $password, $db);
 
     $result = mysqli_query($conn,"SELECT * FROM Products");
 

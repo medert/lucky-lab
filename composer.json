@@ -1,7 +1,5 @@
 {
-
     "require": {
         "josegonzalez/dotenv": "^3.2"
-        "ext-mysql": "*"
     }
 }

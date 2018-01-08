@@ -69,7 +69,7 @@
         </div>
         <div class="box">
           <i class="fa fa-user-o fa-5x"></i>
-          <h3>VOLONTEER</h3>
+          <h3>VOLUNTEER</h3>
           <p>
             As a volunteer-powered non-profit organization, Lucky Lab would not exist without the hard work
             and dedication of our volunteers. The number of dogs and cats we can save depends on the number

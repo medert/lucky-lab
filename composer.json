@@ -1,1 +1,6 @@
-{}
+{
+  
+    "require": {
+        "josegonzalez/dotenv": "^3.2"
+    }
+}

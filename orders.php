@@ -29,11 +29,19 @@
     </header>
     <h1 id="page-title" align="center">Order Today</h1>
     <?php
-    $servername = "localhost";
-    $username = "root";
-    $password = "root";
-    $database = "CompanyDatabase";
-    $port = "8888";
+    require __DIR__."/vendor/autoload.php";
+
+    $Loader = new josegonzalez\Dotenv\Loader(__DIR__."/.env");
+    // Parse the .env file
+    $Loader->parse();
+    //Send the parced .env file to the $_ENV variable
+    $Loader->toEnv();
+
+    $servername = $_ENV['MYSQL_ADDRESS'];
+    $database = $_ENV['MYSQL_DB'];
+    $username = $_ENV['MYSQL_USER'];
+    $password = $_ENV['MYSQL_PASSWORD'];
+    $port = $_ENV['MYSQL_PORT'];
 
     $conn=mysqli_connect($servername,$username,$password,$database,$port);
 
@@ -131,21 +139,21 @@
     <form name="Orders" action="orders.php" method="post">
        <p>
          <label>First name:</label>
-         <input type="text" name="fName" size="30" value="<?php echo $fName; ?>"/><br /><br />
+         <input type="text" name="fName" size="30" value="<?php if (isset($_POST['Submit'])){echo $fName;} ?>"/><br /><br />
        </p>
        <p>
          <label>Last name:</label>
-         <input type="text" name="lName" size="30" value="<?php echo $lName; ?>"/><br /><br />
+         <input type="text" name="lName" size="30" value="<?php if (isset($_POST['Submit'])){echo $lName;} ?>"/><br /><br />
       </p>
       <p>
        <label>Address:</label>
-       <input type="text" name="Address" size="30" value="<?php echo $Address; ?>" /><br /><br />
+       <input type="text" name="Address" size="30" value="<?php if (isset($_POST['Submit'])){echo $Address;} ?>" /><br /><br />
        <label>City:</label>
-       <input type="text" name="City" size="30" value="<?php echo $City; ?>"/><br /><br />
+       <input type="text" name="City" size="30" value="<?php if (isset($_POST['Submit'])){echo $City;} ?>"/><br /><br />
        <label>State:</label>
 
        <select class="" name="State">
-          <option value="<?php echo $_POST['State'];?>"><?php echo $_POST['State']; ?></option>
+          <option value="<?php echo $_POST['State'];?>"><?php if (isset($_POST['Submit'])){echo $State;} ?></option>
           <?php
           for($i=0;$i<50;$i++){
             echo "<option value=" . $states[$i] . ">" . $states[$i] . "</option>";
@@ -153,10 +161,10 @@
           ?>
        </select></br></br>
        <label>Zip:</label>
-       <input type='number' name="Zip" size="30" value="<?php echo $Zip; ?>"/><br /><br />
+       <input type='number' name="Zip" size="30" value="<?php if (isset($_POST['Submit'])){echo $Zip;} ?>"/><br /><br />
 
        <label>Email:</label>
-       <input type='email' name="Email" size="30" value="<?php echo $Email; ?>"/><br /><br />
+       <input type='email' name="Email" size="30" value="<?php if (isset($_POST['Submit'])){echo $Email;} ?>"/><br /><br />
 
        <label>Product:</label>
        <select name="ProductID">
@@ -175,13 +183,29 @@
        <label>Color:</label>
        <select name="Color">
          <option>-</option>
-         <option value="white" <?php if($Color == "white"){echo "selected";}?>>white</option>
+         <?php
+          if (isset($_POST['Submit'])){
+          ?>
+         <option value="white" <?php if($Color == "red"){echo "selected";}?>>white</option>
          <option value="red" <?php if($Color == "red"){echo "selected";}?>>red</option>
          <option value="yellow" <?php if($Color == "yellow"){echo "selected";}?>>yellow</option>
          <option value="black" <?php if($Color == "black"){echo "selected";}?>>black</option>
          <option value="green" <?php if($Color == "green"){echo "selected";}?>>green</option>
          <option value="silver" <?php if($Color == "silver"){echo "selected";}?>>silver</option>
          <option value="blue" <?php if($Color == "blue"){echo "selected";}?>>blue</option>
+         <?php
+          } else{
+         ?>
+            <option value="white">white</option>
+            <option value="red">red</option>
+            <option value="yellow">yellow</option>
+            <option value="black">black</option>
+            <option value="green">green</option>
+            <option value="silver">silver</option>
+            <option value="blue">blue</option>
+        <?php
+          }
+          ?>
 
        </select><br /><br / />
 
@@ -193,7 +217,7 @@
          <input type="radio" value = "pick-up" checked="checked"/>  Pick up
          <br /><br /><br /><br />
 
-       <?php mysqli_close($con);?>
+       <?php mysqli_close($conn);?>
        <input type="reset" value="Cancel Order"/>
        <input type="submit" name="Submit" value="Place an Order"/>
         </center>
@@ -201,11 +225,6 @@
   </div>
     <?php
     } else {
-         $servername = "localhost";
-         $username = "root";
-         $password = "root";
-         $database = "CompanyDatabase";
-         $port = "8888";
 
          $conn=mysqli_connect($servername,$username,$password,$database,$port);
          if ($conn->connect_error) {
@@ -239,7 +258,7 @@
              echo "Error: " . $sql . "<br>" . $conn->error;
          }
 
-         mysqli_close($con);
+         mysqli_close($conn);
     }
     ?>
     <footer>

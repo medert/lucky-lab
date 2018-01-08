@@ -30,11 +30,19 @@
     <h1 id="page-title" align="center">Our Products</h1>
     <div align="center">
       <?php
-      $servername = "localhost";
-      $username = "root";
-      $password = "root";
-      $database = "CompanyDatabase";
-      $port = "8888";
+      require __DIR__."/vendor/autoload.php";
+
+      $Loader = new josegonzalez\Dotenv\Loader(__DIR__."/.env");
+      // Parse the .env file
+      $Loader->parse();
+      //Send the parced .env file to the $_ENV variable
+      $Loader->toEnv();
+
+      $servername = $_ENV['MYSQL_ADDRESS'];
+      $database = $_ENV['MYSQL_DB'];
+      $username = $_ENV['MYSQL_USER'];
+      $password = $_ENV['MYSQL_PASSWORD'];
+      $port = $_ENV['MYSQL_PORT'];
 
       $con=mysqli_connect($servername,$username,$password,$database,$port);
 

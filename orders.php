@@ -233,7 +233,11 @@
     <?php
     } else {
 
-         $conn=mysqli_connect($servername,$username,$password,$database,$port);
+         // Developement connection
+         // $conn=mysqli_connect($servername,$username,$password,$database,$port);
+
+         // Production connection
+         $conn = new mysqli($server, $username, $password, $db);
          if ($conn->connect_error) {
              die("Connection failed: " . $conn->connect_error);
          }

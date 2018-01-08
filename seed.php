@@ -1,9 +1,18 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "root";
-$dbname = "CompanyDatabase";
-$port = "8888";
+
+$url = parse_url(getenv("CLEARDB_DATABASE_URL"));
+
+$server = $url["host"];
+$username = $url["user"];
+$password = $url["pass"];
+$dbname = substr($url["path"], 1);
+$port = "3306"
+
+// $servername = "localhost";
+// $username = "root";
+// $password = "root";
+// $dbname = "CompanyDatabase";
+// $port = "8888";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname, $port);

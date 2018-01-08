@@ -16,7 +16,7 @@ if ($conn->connect_error) {
 
 // Drop datase
 
-$sql = "DROP DATABASE CompanyDatabase";
+$sql = "DROP DATABASE heroku_96babc5b917202e";
 if ($conn->query($sql) === TRUE) {
     echo "Database dropped successfully<br /><br />";
 } else {
@@ -24,7 +24,7 @@ if ($conn->query($sql) === TRUE) {
 }
 
 // Create database
-$sql = "CREATE DATABASE CompanyDatabase";
+$sql = "CREATE DATABASE heroku_96babc5b917202e";
 if ($conn->query($sql) === TRUE) {
     echo "Database created successfully<br /><br />";
 } else {
@@ -32,7 +32,7 @@ if ($conn->query($sql) === TRUE) {
 }
 
 // Select DATABASE
-$sql = "USE CompanyDatabase";
+$sql = "USE heroku_96babc5b917202e";
 if ($conn->query($sql) === TRUE) {
     echo "Database selected successfully<br /><br />";
 } else {
